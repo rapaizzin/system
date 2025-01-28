@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Rapaizzin's Server</title>
+    <link rel="stylesheet" href="spinner.css" />
+    <style>
+        /* Importando o Google Fonts - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
+        }
+        body {
+          min-height: 100vh;
+          background: linear-gradient(180deg, #F1F3FF, #CBD4FF);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .form-container {
+          background: #fff;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          width: 600px;
+        }
+        
+        h1 {
+          text-align: center;
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        label {
+          font-size: 16px;
+          margin-bottom: 5px;
+          display: block;
+        }
+
+        input, select {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          margin-bottom: 15px;
+          font-size: 14px;
+        }
+
+        button {
+          width: 100%;
+          padding: 12px;
+          background-color: #5C6BC0;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        button:hover {
+          background-color: #3f4f8c;
+        }
+
+        .error-message {
+          color: red;
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        #loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #0000003f;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Cadastro</h1>
+        <form id="signupForm">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required placeholder="Apenas o primeiro nome">
+
+            <label for="email">E-mail (Secundário)</label>
+            <input type="email" id="email" name="email" required placeholder="Escreva seu email aqui">
+
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required placeholder="Crie uma senha para entrar na plataforma">
+
+            <label for="discord">Nome do Discord</label>
+            <input type="text" id="discord" name="discord" required placeholder="Digite seu nome no discord">
+
+            <label for="role">Função no Server</label>
+            <select id="role" name="role" required>
+                <option value="Coordenador" disabled>Coordenador</option>
+                <option value="Admin">Admin</option>
+                <option value="Moderador">Moderador</option>
+                <option value="Helper" selected>Helper</option>
+            </select>
+
+            <label for="period">Período de Aula</label>
+            <input type="text" id="period" name="period" required placeholder="Apenas um período">
+
+            <button type="submit" id="btn">Cadastrar</button>
+        </form>
+
+        <div class="error-message" id="error-message"></div>
+    </div>
+
+    <div id="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+        import { getFirestore, setDoc, doc } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHo_jgnNdbDsczK6TlAyt0pWBZzBNC_w0",
+            authDomain: "rapaizzin-server.firebaseapp.com",
+            projectId: "rapaizzin-server",
+            storageBucket: "rapaizzin-server.firebasestorage.app",
+            messagingSenderId: "575827937480",
+            appId: "1:575827937480:web:a8683737c5a0ad1fc5bdfd"
+        };
+    
+        // Inicialização do Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    
+        document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const button = document.getElementById('btn');
+    const spinner = document.getElementById('loading-spinner');
+    button.textContent = "Conectando..."; // Mostrar estado de "conectando"
+    spinner.style.display = "flex"; // Exibir o carregamento
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const discord = document.getElementById('discord').value;
+    const role = document.getElementById('role').value;
+    const period = document.getElementById('period').value;
+
+    try {
+        // Criar conta com e-mail e senha
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Adicionar dados no Firestore
+        await setDoc(doc(db, "usuarios", user.uid), {
+            nome: name,
+            email: email,
+            discord: discord,
+            role: role,
+            period: period
+        });
+
+        
+        button.textContent = "Cadastrar";
+        setTimeout(() => {
+            spinner.style.display = "none"; // Ocultar carregamento
+        }, 2000);
+        
+        this.reset();
+        window.location.href = "./assets/html/thanks"
+    } catch (error) {
+        const errorMessage = error.message;
+        document.getElementById('error-message').textContent = errorMessage;
+        button.textContent = "Cadastrar";
+        setTimeout(() => {
+            spinner.style.display = "none"; // Ocultar carregamento
+        }, 2000);
+    }
+});
+
+    </script>
+    
+      
+</body>
+</html>

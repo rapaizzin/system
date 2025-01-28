@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimento - Cadastro Concluído</title>
+    <style>
+        /* Importando o Google Fonts - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #F1F3FF, #CBD4FF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            overflow: hidden; /* Para não permitir que animações ultrapassem a tela */
+        }
+
+        .content {
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transform: scale(0);
+            animation: scaleUp 1s ease-in-out forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #5C6BC0;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        .thank-you-message {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+            animation: fadeInMessage 2s ease-out forwards;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            font-size: 16px;
+            color: #777;
+            animation: fadeInMessage 2.5s ease-out forwards;
+        }
+
+        .btn-next {
+            background-color: #5C6BC0;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInButton 2.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInMessage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: .6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Cadastro Concluído!</h1>
+        <div class="thank-you-message">Obrigado por se cadastrar na plataforma <strong>Rapaizzin's Server</strong>!</div>
+        <div class="note">Aguarde, em breve você terá acesso a todas as funcionalidades exclusivas do servidor.</div><br><br>
+        <button class="btn-next" onclick="nextStep()" disabled>Seguir para o Dashboard</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.0.0/dist/index.bundle.js"></script>
+
+    <script>
+        // Correção da criação do efeito de fogos
+        const fireworks = new Fireworks(); // Corrigido a criação da instância.
+        fireworks.start(); // Inicia os fogos de artifício
+    </script>
+</body>
+</html>
