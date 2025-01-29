@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/@codingnepal -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifique Ausência</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../spinner.css" />
+    <!-- Linking Google Fonts for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  </head>
+  <body>
+   <!-- Mobile Sidebar Menu Button -->
+   <button class="sidebar-menu-button">
+    <span class="material-symbols-rounded">menu</span>
+  </button>
+  <aside class="sidebar">
+    <!-- Sidebar Header -->
+    <header class="sidebar-header">
+      <a href="#" class="header-logo">
+        <img src="../logo.png"/>
+      </a>
+      <button class="sidebar-toggler">
+        <span class="material-symbols-rounded">chevron_left</span>
+      </button>
+    </header>
+    <nav class="sidebar-nav">
+      <!-- Primary Top Nav -->
+      <ul class="nav-list primary-nav">
+        <li class="nav-item">
+          <a href="dashboard" class="nav-link">
+            <span class="material-symbols-rounded">dashboard</span>
+            <span class="nav-label">Dashboard</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Dashboard</a></li>
+          </ul>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown-container">
+          <a href="#" class="nav-link dropdown-toggle">
+            <span class="material-symbols-rounded">handshake</span>
+            <span class="nav-label">Parcerias</span>
+            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+          </a>
+          <!-- Dropdown Menu -->
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Parcerias</a></li>
+            <li class="nav-item"><a href="parcerias" class="nav-link dropdown-link">Cadastrar Nova</a></li>
+            <li class="nav-item"><a href="parc-active" class="nav-link dropdown-link">Ativas</a></li>
+            <li class="nav-item"><a href="parc-cancel" class="nav-link dropdown-link">Canceladas</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown-container">
+          <a href="#" class="nav-link dropdown-toggle">
+            <span class="material-symbols-rounded">chat</span>
+            <span class="nav-label">Mensagens</span>
+            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+          </a>
+          <!-- Dropdown Menu -->
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Mensagens</a></li>
+            <li class="nav-item"><a href="webhooks" class="nav-link dropdown-link">WebHooks</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown-container">
+          <a href="#" class="nav-link  dropdown-toggle">
+            <span class="material-symbols-rounded">notifications_paused</span>
+            <span class="nav-label">Ausências</span>
+            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Ausências</a></li>
+            <li class="nav-item"><a href="not-ausencias" class="nav-link dropdown-link">Notifique sua Ausência</a></li>
+            <li class="nav-item"><a href="verify-ausencias" class="nav-link dropdown-link">Veja as Ausências</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item disabled">
+          <a href="#" class="nav-link">
+            <span class="material-symbols-rounded">edit_document</span>
+            <span class="nav-label">Relatórios</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Relatórios</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item  disabled">
+          <a href="#" class="nav-link">
+            <span class="material-symbols-rounded">calendar_month</span>
+            <span class="nav-label">Tarefas Diárias</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Notificações</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item  disabled">
+          <a href="#" class="nav-link">
+            <span class="material-symbols-rounded">settings</span>
+            <span class="nav-label">Configurações</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Configurações</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Secondary Bottom Nav -->
+      <ul class="nav-list secondary-nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="material-symbols-rounded">help</span>
+            <span class="nav-label">Suporte</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Suporte</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="material-symbols-rounded">logout</span>
+            <span class="nav-label">Sair</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link dropdown-title">Sair</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+    <main>
+        <h1>Registrar Ausência</h1>
+        <div class="form-container">
+            <h2 style="margin-bottom: 20px">Preencha:</h2>
+    
+            <form id="ausencia-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" placeholder="Coloque seu nome aqui" required>
+                <!-- Dia Atual (Não editável) -->
+                <label for="data-atual">Dia Atual:</label>
+                <input type="date" id="data-atual" readonly>
+    
+                <!-- Até quando ficará ausente -->
+                <label for="data-retorno">Até quando ficará fora:</label>
+                <input type="date" id="data-retorno" required>
+    
+                <!-- Motivo da ausência -->
+                <label for="motivo-ausencia">Motivo:</label>
+                <textarea id="motivo-ausencia" rows="3" required></textarea>
+    
+                <!-- Categoria da ausência -->
+                <label for="categoria-ausencia">Categoria:</label>
+                <select id="categoria-ausencia">
+                    <option value="grave">Grave</option>
+                    <option value="razoavel">Razoável</option>
+                    <option value="normal">Normal</option>
+                </select>
+    
+                <button type="submit">Enviar Ausência</button>
+            </form>
+        </div>
+    </main>
+    <!-- Script -->
+
+    <script src="../../script.js"></script>
+    <script type="module" src="../../ausencias.js"></script>
+  </body>
+</html>

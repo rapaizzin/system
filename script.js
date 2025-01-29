@@ -29,3 +29,16 @@ const toggleDropdown = (dropdown, menu, isOpen) => {
   });
   // Collapse sidebar by default on small screens
   if (window.innerWidth <= 1024) document.querySelector(".sidebar").classList.add("collapsed");
+
+
+  // Função que lida com a entrada e formatação de quebras de linha
+  document.getElementById("descricao-parceria").addEventListener("input", function(event) {
+    const textarea = event.target;
+
+    // Substituindo os múltiplos espaços por um único espaço
+    textarea.value = textarea.value.replace(/\s+/g, ' ');
+
+    // Assegura que a formatação das quebras de linha seja preservada
+    textarea.style.height = 'auto'; // Reseta altura automática
+    textarea.style.height = (textarea.scrollHeight) + 'px'; // Ajusta a altura de acordo com o conteúdo
+  });

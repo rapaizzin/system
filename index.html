@@ -1,11 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Rapaizzin's Server</title>
+    <link rel="stylesheet" href="spinner.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
+        }
+        body {
+          min-height: 100vh;
+          background: linear-gradient(180deg, #F1F3FF, #CBD4FF);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .form-container {
+          background: #fff;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          width: 400px;
+          text-align: center;
+        }
+
+        h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        label {
+          font-size: 16px;
+          margin-bottom: 5px;
+          display: block;
+          text-align: left;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          margin-bottom: 15px;
+          font-size: 14px;
+        }
+
+        button {
+          width: 100%;
+          padding: 12px;
+          background-color: #5C6BC0;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        button:hover {
+          background-color: #3f4f8c;
+        }
+
+        .error-message {
+          color: red;
+          margin-top: 10px;
+          font-size: 14px;
+        }
+
+        #loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #0000003f;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <div class="form-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+
+            <button type="submit" id="btn">Entrar</button>
+        </form>
+
+        <div class="error-message" id="error-message"></div>
+    </div>
+
+    <div id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <script type="module">
+        
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js';
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCHo_jgnNdbDsczK6TlAyt0pWBZzBNC_w0",
+        authDomain: "rapaizzin-server.firebaseapp.com",
+        projectId: "rapaizzin-server",
+        storageBucket: "rapaizzin-server.firebasestorage.app",
+        messagingSenderId: "575827937480",
+        appId: "1:575827937480:web:a8683737c5a0ad1fc5bdfd"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const button = document.getElementById('btn');
+        const spinner = document.getElementById('loading-spinner');
+        button.textContent = "Entrando...";
+        spinner.style.display = "flex";
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            // Tenta logar o usuário
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Redireciona para outra página após login
+            window.location.href = "./assets/html/thanks"; // Garantir que a página de destino seja correta
+
+        } catch (error) {
+            const errorMessage = error.message;
+            document.getElementById('error-message').textContent = errorMessage;
+            button.textContent = "Entrar";
+        }
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 2000);
+    });
+    </script>
 </body>
 </html>

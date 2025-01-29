@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/@codingnepal -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parcerias - Ativas</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../spinner.css" />
+    <!-- Linking Google Fonts for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  </head>
+  <body>
+    <!-- Mobile Sidebar Menu Button -->
+    <button class="sidebar-menu-button">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+    <aside class="sidebar">
+      <!-- Sidebar Header -->
+      <header class="sidebar-header">
+        <a href="#" class="header-logo">
+          <img src="../logo.png"/>
+        </a>
+        <button class="sidebar-toggler">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+      </header>
+      <nav class="sidebar-nav">
+        <!-- Primary Top Nav -->
+        <ul class="nav-list primary-nav">
+          <li class="nav-item">
+            <a href="dashboard" class="nav-link">
+              <span class="material-symbols-rounded">dashboard</span>
+              <span class="nav-label">Dashboard</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Dashboard</a></li>
+            </ul>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link dropdown-toggle">
+              <span class="material-symbols-rounded">handshake</span>
+              <span class="nav-label">Parcerias</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Parcerias</a></li>
+              <li class="nav-item"><a href="parcerias" class="nav-link dropdown-link">Cadastrar Nova</a></li>
+              <li class="nav-item"><a href="parc-active" class="nav-link dropdown-link">Ativas</a></li>
+              <li class="nav-item"><a href="parc-cancel" class="nav-link dropdown-link">Canceladas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link dropdown-toggle">
+              <span class="material-symbols-rounded">chat</span>
+              <span class="nav-label">Mensagens</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Mensagens</a></li>
+              <li class="nav-item"><a href="webhooks" class="nav-link dropdown-link">WebHooks</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link  dropdown-toggle">
+              <span class="material-symbols-rounded">notifications_paused</span>
+              <span class="nav-label">Ausências</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Ausências</a></li>
+              <li class="nav-item"><a href="not-ausencias" class="nav-link dropdown-link">Notifique sua Ausência</a></li>
+              <li class="nav-item"><a href="verify-ausencias" class="nav-link dropdown-link">Veja as Ausências</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">edit_document</span>
+              <span class="nav-label">Relatórios</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Relatórios</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item  disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">calendar_month</span>
+              <span class="nav-label">Tarefas Diárias</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Notificações</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item  disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">settings</span>
+              <span class="nav-label">Configurações</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Configurações</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- Secondary Bottom Nav -->
+        <ul class="nav-list secondary-nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">help</span>
+              <span class="nav-label">Suporte</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Suporte</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">logout</span>
+              <span class="nav-label">Sair</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <h1>parcerias ativas</h1>
+      <div class="active-parcs" id="parcerias-list">
+       
+    </div>
+    
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <script>
+      const firebaseConfig = {
+    apiKey: "API_KEY",
+    authDomain: "rapaizzin-server.firebaseapp.com",
+    projectId: "rapaizzin-server",
+    storageBucket: "rapaizzin-server.firebasestorage.app",
+    messagingSenderId: "575827937480",
+    appId: "1:575827937480:web:a8683737c5a0ad1fc5bdfd"
+};
+
+// Inicializa Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Busca todas as parcerias
+async function fetchParcerias() {
+    const snapshot = await db.collection("parcerias").get();
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}async function atualizarStatus() {
+    const agora = new Date();
+    const parcerias = await fetchParcerias();
+
+    parcerias.forEach(async (parc) => {
+        let novoStatus = parc.status || "pending";
+        let statusText = "Pendente";
+
+        // Converte os timestamps do Firestore
+        const dataCriacao = parc.dataCriacao?.toDate ? parc.dataCriacao.toDate() : new Date(parc.dataCriacao);
+        const dataExpiracao = parc.dataExpiracao?.toDate ? parc.dataExpiracao.toDate() : new Date(parc.dataExpiracao);
+
+        if (isNaN(dataCriacao.getTime())) {
+            console.error(`Erro: dataCriacao inválida para ${parc.nome}. Valor:`, parc.dataCriacao);
+            return;
+        }
+
+        const tempoDecorrido = agora - dataCriacao;
+        const tresMinutos = 180000; // 3 minutos em milissegundos
+
+        if (tempoDecorrido >= tresMinutos && novoStatus === "pending") {
+            novoStatus = "ativa";
+            statusText = "Ativa";
+        }
+
+        // Se faltam 2 dias para expirar → Expirando
+        if (novoStatus !== "cancelada") {
+            const doisDiasAntes = new Date(dataExpiracao);
+            doisDiasAntes.setDate(doisDiasAntes.getDate() - 2);
+            if (agora >= doisDiasAntes && novoStatus !== "expirando") {
+                novoStatus = "expirando";
+                statusText = "Expirando";
+            }
+        }
+
+        // Atualiza no Firestore apenas se houve mudança
+        if (parc.status !== novoStatus) {
+            await db.collection("parcerias").doc(parc.id).update({ status: novoStatus });
+            console.log(`Status atualizado: "${statusText}" - ${parc.nome}`);
+        }
+    });
+}
+
+
+// Renderiza a lista de parcerias (ignorando as com status 'cancelada')
+async function renderizarParcerias() {
+    const container = document.getElementById("parcerias-list");
+    container.innerHTML = "";
+    const parcerias = await fetchParcerias();
+
+    // Filtra parcerias para remover as que têm o status 'cancelada'
+    const parceriasAtivas = parcerias.filter(parc => parc.status !== "cancelada");
+
+    parceriasAtivas.forEach((parc) => {
+        const div = document.createElement("div");
+        div.className = `parc-content ${parc.status || "pending"}`;
+
+        let statusText = "Pendente";
+        if (parc.status === "ativa") statusText = "Ativa";
+        if (parc.status === "expirando") statusText = "Expirando";
+
+        div.innerHTML = `
+            <div class="booble ${parc.status || "pending"}" id="booble-${parc.id}">
+                <span id="status-${parc.id}">${statusText}</span>
+            </div>
+            <img src="${parc.imagem || 'placeholder.jpg'}" alt="Imagem da parceria" width="100">
+            <h3>${parc.nome}</h3>
+            <p>${parc.descricao}</p><br>
+            <button id="cancel-btn-${parc.id}">
+                <span id="cancel">Cancelar</span>
+                <span id="expirion">${parc.dataExpiracao}</span>
+            </button>
+        `;
+
+        // Adicionando o botão ao container
+        container.appendChild(div);
+    });
+
+    // Delegação de evento para o botão 'cancelar'
+    container.addEventListener("click", async (event) => {
+        // Verifique se o alvo do evento é um botão de cancelamento
+        if (event.target && event.target.id.startsWith("cancel-btn-")) {
+            const parcId = event.target.id.replace("cancel-btn-", "");
+            await cancelarParceria(parcId);
+        }
+    });
+}
+
+// Cancela a parceria e atualiza o Firestore
+async function cancelarParceria(parcId) {
+    // Atualiza o status no Firestore para "cancelada"
+    await db.collection("parcerias").doc(parcId).update({ status: "cancelada" });
+    console.log(`Parceria ${parcId} foi cancelada.`);
+
+    // Atualiza a lista de parcerias na tela
+    renderizarParcerias();  // Re-renderiza as parcerias para refletir a mudança
+}
+
+
+// Atualiza apenas o status na tela
+async function atualizarStatusNaTela() {
+    const parcerias = await fetchParcerias();
+
+    parcerias.forEach(parc => {
+        const statusElement = document.querySelector(`#status-${parc.id}`);
+        const booble = document.getElementById(`booble-${parc.id}`);
+
+        if (statusElement && booble) {
+            let statusText = "Pendente";
+            if (parc.status === "ativa") statusText = "Ativa";
+            if (parc.status === "expirando") statusText = "Expirando";
+
+            statusElement.textContent = statusText;
+            booble.className = `booble ${parc.status}`;
+        }
+    });
+}
+
+// Intervalos de atualização
+setInterval(atualizarStatus, 6000);  // Atualiza o status no Firestore a cada minuto
+setInterval(atualizarStatusNaTela, 5000); // Apenas atualiza o status na tela a cada 5 segundos
+
+// Inicia a renderização ao carregar
+atualizarStatus();
+renderizarParcerias();
+
+  </script>
+  
+    <!-- Script -->
+    <script src="../../script.js"></script>
+</body>
+</html>

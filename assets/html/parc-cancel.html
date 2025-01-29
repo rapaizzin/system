@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/@codingnepal -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parcerias - Canceladas</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../spinner.css" />
+    <!-- Linking Google Fonts for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  </head>
+  <body>
+    <!-- Mobile Sidebar Menu Button -->
+    <button class="sidebar-menu-button">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
+    <aside class="sidebar">
+      <!-- Sidebar Header -->
+      <header class="sidebar-header">
+        <a href="#" class="header-logo">
+          <img src="../logo.png"/>
+        </a>
+        <button class="sidebar-toggler">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+      </header>
+      <nav class="sidebar-nav">
+        <!-- Primary Top Nav -->
+        <ul class="nav-list primary-nav">
+          <li class="nav-item">
+            <a href="dashboard" class="nav-link">
+              <span class="material-symbols-rounded">dashboard</span>
+              <span class="nav-label">Dashboard</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Dashboard</a></li>
+            </ul>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link dropdown-toggle">
+              <span class="material-symbols-rounded">handshake</span>
+              <span class="nav-label">Parcerias</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Parcerias</a></li>
+              <li class="nav-item"><a href="parcerias" class="nav-link dropdown-link">Cadastrar Nova</a></li>
+              <li class="nav-item"><a href="parc-active" class="nav-link dropdown-link">Ativas</a></li>
+              <li class="nav-item"><a href="parc-cancel" class="nav-link dropdown-link">Canceladas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link dropdown-toggle">
+              <span class="material-symbols-rounded">chat</span>
+              <span class="nav-label">Mensagens</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Mensagens</a></li>
+              <li class="nav-item"><a href="webhooks" class="nav-link dropdown-link">WebHooks</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link  dropdown-toggle">
+              <span class="material-symbols-rounded">notifications_paused</span>
+              <span class="nav-label">Ausências</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Ausências</a></li>
+              <li class="nav-item"><a href="not-ausencias" class="nav-link dropdown-link">Notifique sua Ausência</a></li>
+              <li class="nav-item"><a href="verify-ausencias" class="nav-link dropdown-link">Veja as Ausências</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">edit_document</span>
+              <span class="nav-label">Relatórios</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Relatórios</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item  disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">calendar_month</span>
+              <span class="nav-label">Tarefas Diárias</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Notificações</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item  disabled">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">settings</span>
+              <span class="nav-label">Configurações</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Configurações</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- Secondary Bottom Nav -->
+        <ul class="nav-list secondary-nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">help</span>
+              <span class="nav-label">Suporte</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Suporte</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">logout</span>
+              <span class="nav-label">Sair</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+        <h1>Parcerias Canceladas</h1>
+        <div class="active-parcs" id="parcerias-list">
+        </div>
+      </main>
+      
+      <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+      
+      <script>
+        const firebaseConfig = {
+          apiKey: "API_KEY",
+          authDomain: "rapaizzin-server.firebaseapp.com",
+          projectId: "rapaizzin-server",
+          storageBucket: "rapaizzin-server.firebasestorage.app",
+          messagingSenderId: "575827937480",
+          appId: "1:575827937480:web:a8683737c5a0ad1fc5bdfd"
+        };
+      
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+      
+        // Busca parcerias com status "cancelada"
+        async function fetchParceriasCanceladas() {
+          const snapshot = await db.collection("parcerias").where("status", "==", "cancelada").get();
+          return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+      
+        // Renderiza as parcerias canceladas
+        async function renderizarParceriasCanceladas() {
+          const container = document.getElementById("parcerias-list");
+          container.innerHTML = "";
+          const parcerias = await fetchParceriasCanceladas();
+      
+          if (parcerias.length === 0) {
+            container.innerHTML = "<p>Nenhuma parceria cancelada encontrada.</p>";
+          }
+      
+          parcerias.forEach((parc) => {
+            const div = document.createElement("div");
+            div.className = `parc-content ${parc.status || "cancelada"}`;
+      
+            div.innerHTML = `
+              <div class="booble ${parc.status || "cancelada"}" id="booble-${parc.id}">
+                  <span id="status-${parc.id}">Cancelada</span>
+              </div>
+              <img src="${parc.imagem || 'placeholder.jpg'}" alt="Imagem da parceria" width="100">
+              <h3>${parc.nome}</h3>
+              <p>${parc.descricao}</p><br>
+              <span><strong>Expiração:</strong> ${parc.dataExpiracao}</span>
+            `;
+      
+            container.appendChild(div);
+          });
+        }
+      
+        // Chama a função para renderizar as parcerias canceladas
+        renderizarParceriasCanceladas();
+      </script>
+      
+  
+    <!-- Script -->
+    <script src="../../script.js"></script>
+</body>
+</html>

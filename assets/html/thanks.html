@@ -76,6 +76,10 @@
             animation: fadeInButton 2.5s ease-out forwards;
         }
 
+        .btn-next:hover {
+            background-color: #4b5aac;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -121,7 +125,7 @@
                 opacity: 0;
             }
             to {
-                opacity: .6;
+                opacity: 1;
             }
         }
     </style>
@@ -131,12 +135,17 @@
         <h1>Cadastro Concluído!</h1>
         <div class="thank-you-message">Obrigado por se cadastrar na plataforma <strong>Rapaizzin's Server</strong>!</div>
         <div class="note">Aguarde, em breve você terá acesso a todas as funcionalidades exclusivas do servidor.</div><br><br>
-        <button class="btn-next" onclick="nextStep()" disabled>Seguir para o Dashboard</button>
+        <button class="btn-next" onclick="nextStep()">Seguir para o Dashboard</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.0.0/dist/index.bundle.js"></script>
 
     <script>
+
+        function nextStep() {
+            window.location.href = 'dashboard'
+        }
+
         // Correção da criação do efeito de fogos
         const fireworks = new Fireworks(); // Corrigido a criação da instância.
         fireworks.start(); // Inicia os fogos de artifício

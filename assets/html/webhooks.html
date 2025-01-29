@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/@codingnepal -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webhooks - Messages</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../spinner.css" />
+    <!-- Linking Google Fonts for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  </head>
+  <body>
+    <!-- Mobile Sidebar Menu Button -->
+    <button class="sidebar-menu-button">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+      <aside class="sidebar">
+        <!-- Sidebar Header -->
+        <header class="sidebar-header">
+          <a href="#" class="header-logo">
+            <img src="../logo.png"/>
+          </a>
+          <button class="sidebar-toggler">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+        </header>
+        <nav class="sidebar-nav">
+          <!-- Primary Top Nav -->
+          <ul class="nav-list primary-nav">
+            <li class="nav-item">
+              <a href="dashboard" class="nav-link">
+                <span class="material-symbols-rounded">dashboard</span>
+                <span class="nav-label">Dashboard</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Dashboard</a></li>
+              </ul>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown-container">
+              <a href="#" class="nav-link dropdown-toggle">
+                <span class="material-symbols-rounded">handshake</span>
+                <span class="nav-label">Parcerias</span>
+                <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+              </a>
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Parcerias</a></li>
+                <li class="nav-item"><a href="parcerias" class="nav-link dropdown-link">Cadastrar Nova</a></li>
+                <li class="nav-item"><a href="parc-active" class="nav-link dropdown-link">Ativas</a></li>
+                <li class="nav-item"><a href="parc-cancel" class="nav-link dropdown-link">Canceladas</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown-container">
+              <a href="#" class="nav-link dropdown-toggle">
+                <span class="material-symbols-rounded">chat</span>
+                <span class="nav-label">Mensagens</span>
+                <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+              </a>
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Mensagens</a></li>
+                <li class="nav-item"><a href="webhooks" class="nav-link dropdown-link">WebHooks</a></li>
+              </ul>
+            </li>
+  
+            <li class="nav-item dropdown-container">
+              <a href="#" class="nav-link  dropdown-toggle">
+                <span class="material-symbols-rounded">notifications_paused</span>
+                <span class="nav-label">Ausências</span>
+                <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Ausências</a></li>
+                <li class="nav-item"><a href="not-ausencias" class="nav-link dropdown-link">Notifique sua Ausência</a></li>
+                <li class="nav-item"><a href="verify-ausencias" class="nav-link dropdown-link">Veja as Ausências</a></li>
+              </ul>
+            </li>
+  
+            <li class="nav-item disabled">
+              <a href="#" class="nav-link">
+                <span class="material-symbols-rounded">edit_document</span>
+                <span class="nav-label">Relatórios</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Relatórios</a></li>
+              </ul>
+            </li>
+  
+            <li class="nav-item  disabled">
+              <a href="#" class="nav-link">
+                <span class="material-symbols-rounded">calendar_month</span>
+                <span class="nav-label">Tarefas Diárias</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Notificações</a></li>
+              </ul>
+            </li>
+  
+            <li class="nav-item  disabled">
+              <a href="#" class="nav-link">
+                <span class="material-symbols-rounded">settings</span>
+                <span class="nav-label">Configurações</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Configurações</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Secondary Bottom Nav -->
+          <ul class="nav-list secondary-nav">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span class="material-symbols-rounded">help</span>
+                <span class="nav-label">Suporte</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Suporte</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <span class="material-symbols-rounded">logout</span>
+                <span class="nav-label">Sair</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a class="nav-link dropdown-title">Sair</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+    <main>
+        <h1>Envie Mensagens</h1>
+        <div class="form-container" id="parcerias-form">
+            <h2 style="margin-bottom: 20px">Preencha:</h2>
+    
+            <form id="parceria-form">
+                <!-- Tipo da Mensagem -->
+                <label for="tipo-mensagem">Tipo de Mensagem:</label>
+                <select id="tipo-mensagem">
+                    <option value="mensagem">Mensagem Simples</option>
+                    <option value="embed">Embed</option>
+                    <option value="#" disabled>Mais em breve</option>
+                </select>
+    
+                <!-- Mensagem Simples -->
+                <div id="mensagem-container">
+                    <label for="mensagem-content">Mensagem Content:</label>
+                    <textarea id="mensagem-content" placeholder="Digite a mensagem"></textarea>
+                </div>
+    
+                <!-- Campos para Embed -->
+                <div id="embed-container">
+                    <label for="embed-title">Title:</label>
+                    <input type="text" id="embed-title" placeholder="Digite o título">
+    
+                    <label for="embed-description">Description:</label>
+                    <textarea id="embed-description" placeholder="Digite a descrição"></textarea>
+    
+                    <label for="embed-color">Color (Hexadecimal):</label>
+                    <input type="text" id="embed-color" placeholder="#ff0000">
+                </div>
+    
+                <!-- Escolher Canal/Webhook -->
+                <label for="webhook-canal">Enviar para:</label>
+                <select id="webhook-canal">
+                    <option value="https://discord.com/api/webhooks/1334241388178706473/18FWpabJkRNnBv5RLqzOLZnIsaDMUObzh0xc8CqDwbmUs-qfbxV2F0MzVNkVQ5Vglsyy">╭⭑📢✧anúncios﹕</option>
+                    <option value="https://discord.com/api/webhooks/1334241612758388798/ofQy4_k9ewgsVBGrvNSQ9Cj901nE_JM2VBQ9g7QJExAW3txmjVELZB9goBjN3pEwjCno">┊⭑🤝✧parceiros﹕</option>
+                    <option value="https://discord.com/api/webhooks/1334241815146135709/R0BrJz33C2ZvvcINAd8wT8d66R3d88NzYlFcb1OpXO7r66JzOgH9KZmflm74ZQezXxwL">╰⭑🍀✧sorteios﹕</option>
+                    <option value="#" disabled>Mais em breve</option>
+                </select>
+    
+                <!-- Botão de Enviar -->
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </main>
+    <!-- Script -->
+
+    <script src="../../script.js"></script>
+    <script src="../../webhooks.js"></script>
+  </body>
+</html>
