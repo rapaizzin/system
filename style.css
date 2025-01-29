@@ -406,4 +406,36 @@ button:hover {
   .sidebar.collapsed .sidebar-nav .primary-nav {
     transform: translateY(15px);
   }
+
+  main {
+    top: 60px;
+    left: 0;
+  }
+
+  
+  .sidebar.collapsed ~ main {
+    width: 100%;
+  }
+
+  .sidebar ~ main{
+    width: 100%;
+  }
+
+  main h1 {
+    font-size: 1.8rem;
+  }
+
+  
+  .form-container {
+    width: 100%;
+  }
+
+  .active-parcs {
+    grid-template-columns: 100%;
+  }
+
+  .parc-content {
+    width: 100%;
+  }
+
 }
